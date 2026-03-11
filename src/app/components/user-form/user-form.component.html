@@ -1,0 +1,19 @@
+<p>user-form works!</p>
+<h2>Template Form</h2>
+
+<form #userForm="ngForm">
+
+  <input
+    name="username"
+    [(ngModel)]="username"
+    #usernameControl="ngModel"
+    required
+    placeholder="Enter Name">
+
+  <div *ngIf="usernameControl.invalid && (usernameControl.touched || usernameControl.dirty)" style="color: red; margin-top: 5px;">
+    <div *ngIf="usernameControl.errors?.['required']">
+      Name is required.
+    </div>
+  </div>
+
+</form>

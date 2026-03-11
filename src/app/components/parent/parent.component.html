@@ -1,0 +1,4 @@
+
+<p>parent works!</p>
+<app-child [parentData]="message" (childEvent)="receiveData($event)"></app-child>
+<p><strong>Message from child:</strong> {{ childMessage }}</p>
