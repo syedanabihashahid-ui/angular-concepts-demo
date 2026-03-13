@@ -1,4 +1,15 @@
+<h2>Parent Component</h2>
 
-<p>parent works!</p>
-<app-child [parentData]="message" (childEvent)="receiveData($event)"></app-child>
-<p><strong>Message from child:</strong> {{ childMessage }}</p>
+<app-child (userSubmit)="getUserData($event)"></app-child>
+
+<hr>
+
+<h3>Submitted Data (Testing)</h3>
+
+<div *ngIf="receivedUser">
+
+  <p><strong>Name:</strong> {{ receivedUser.name }}</p>
+  <p><strong>Email:</strong> {{ receivedUser.email }}</p>
+  <p><strong>Password:</strong> [hidden]</p>
+
+</div>

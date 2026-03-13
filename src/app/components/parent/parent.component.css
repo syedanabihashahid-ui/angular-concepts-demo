@@ -1,0 +1,16 @@
+.submitted-data {
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 5px;
+  padding: 15px;
+  margin-top: 10px;
+  line-height: 1.6;
+}
+
+.submitted-data div {
+  margin-bottom: 8px;
+}
+
+.submitted-data div:last-child {
+  margin-bottom: 0;
+}

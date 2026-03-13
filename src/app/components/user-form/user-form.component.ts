@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -11,21 +11,24 @@ import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } 
 })
 export class UserFormComponent {
 
-  username = "";
-
   registerForm: FormGroup;
+
+  @Output() userSubmit = new EventEmitter<any>();
 
   constructor(private fb: FormBuilder){
 
     this.registerForm = this.fb.group({
-      email: ['', Validators.required],
+      name: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.minLength(6)]
     });
 
   }
 
   submit(){
-    console.log(this.registerForm.value);
+    if (this.registerForm.valid) {
+      this.userSubmit.emit(this.registerForm.value);
+    }
   }
 
 }
