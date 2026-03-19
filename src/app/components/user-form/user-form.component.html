@@ -1,40 +1,52 @@
-<h2>Reactive Form</h2>
-
 <form [formGroup]="registerForm" (ngSubmit)="submit()">
-
-  <div style="margin-bottom: 15px;">
-    <label for="name" style="display: block; margin-bottom: 5px;">Name</label>
-    <input id="name" formControlName="name" placeholder="Enter name">
-    <div *ngIf="registerForm.get('name')?.invalid && (registerForm.get('name')?.touched || registerForm.get('name')?.dirty)" style="color: red; margin-top: 5px; font-size: 0.8em;">
-      <div *ngIf="registerForm.get('name')?.errors?.['required']">
-        Name is required.
-      </div>
+  <div class="form-field">
+    <label for="name">Name</label>
+    <input id="name" type="text" formControlName="name" />
+    @if (name?.invalid && (name?.dirty || name?.touched)) {
+    <div class="error-messages">
+      @if (name?.errors?.['required']) {
+      <small class="text-danger">Name is required.</small>
+      }
     </div>
+    }
   </div>
 
-  <div style="margin-bottom: 15px;">
-    <label for="email" style="display: block; margin-bottom: 5px;">Email</label>
-    <input id="email" formControlName="email" placeholder="Email">
-    <div *ngIf="registerForm.get('email')?.invalid && (registerForm.get('email')?.touched || registerForm.get('email')?.dirty)" style="color: red; margin-top: 5px; font-size: 0.8em;">
-      <div *ngIf="registerForm.get('email')?.errors?.['required']">
-        Email is required.
-      </div>
-      <div *ngIf="registerForm.get('email')?.errors?.['email']">
-        Please enter a valid email address.
-      </div>
+  <div class="form-field">
+    <label for="email">Email</label>
+    <input id="email" type="email" formControlName="email" />
+    @if (email?.invalid && (email?.dirty || email?.touched)) {
+    <div class="error-messages">
+      @if (email?.errors?.['required']) {
+      <small class="text-danger">Email is required.</small>
+      }
+      @if (email?.errors?.['email']) {
+      <small class="text-danger">Please enter a valid email.</small>
+      }
     </div>
+    }
   </div>
 
-  <div style="margin-bottom: 15px;">
-    <label for="password" style="display: block; margin-bottom: 5px;">Password</label>
-    <input id="password" type="password" formControlName="password" placeholder="Password">
-    <div *ngIf="registerForm.get('password')?.invalid && (registerForm.get('password')?.touched || registerForm.get('password')?.dirty)" style="color: red; margin-top: 5px; font-size: 0.8em;">
-      <div *ngIf="registerForm.get('password')?.errors?.['minlength']">
-        Password must be at least 6 characters long.
-      </div>
+  <div class="form-field">
+    <label for="password">Password</label>
+    <input id="password" type="password" formControlName="password" />
+    @if (password?.invalid && (password?.dirty || password?.touched)) {
+    <div class="error-messages">
+      @if (password?.errors?.['required']) {
+      <small class="text-danger">Password is required.</small>
+      }
+      @if (password?.errors?.['minlength']) {
+      <small class="text-danger">Password must be at least 6 characters long.</small>
+      }
     </div>
+    }
   </div>
 
-  <button type="submit" [disabled]="registerForm.invalid">Register</button>
-
+  <button type="submit">Submit</button>
 </form>
+
+@if (submittedData) {
+<div class="submitted-details">
+  <h3>Submitted Details:</h3>
+  <pre>{{ submittedData | json }}</pre>
+</div>
+}

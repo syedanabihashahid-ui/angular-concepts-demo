@@ -1,1 +1,21 @@
-/* Styles for user-form component */
+.form-field {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.error-messages {
+  margin-top: 5px;
+}
+
+.text-danger {
+  color: #dc3545; /* A standard red color for errors */
+}
+
+.submitted-details {
+  margin-top: 20px;
+}

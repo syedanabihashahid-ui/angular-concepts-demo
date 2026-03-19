@@ -1,0 +1,9 @@
+.nested-outlet {
+  border: 1px solid #ccc;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+nav a {
+  margin-right: 10px;
+}
