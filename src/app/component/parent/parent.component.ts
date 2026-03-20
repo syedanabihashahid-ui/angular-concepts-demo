@@ -1,7 +1,9 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ChildComponent } from '../child/child.component';
 import { SharedStateService, User } from '../../services/shared-state.service'; // <- import service
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-parent',
@@ -33,7 +35,7 @@ import { SharedStateService, User } from '../../services/shared-state.service'; 
   `,
   styleUrls: ['./parent.component.css']
 })
-export class ParentComponent {
+export class ParentComponent implements OnDestroy {
 
   // Component State using Signals
   readonly receivedUser = signal<User | null>(null);
@@ -41,11 +43,15 @@ export class ParentComponent {
   // Component State using Service
   serviceUser: User | null = null;
 
+  private destroy$ = new Subject<void>();
+
   constructor(private stateService: SharedStateService) {
     // Subscribe to service BehaviorSubject
-    this.stateService.user$.subscribe(user => {
-      this.serviceUser = user;
-    });
+    this.stateService.user$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(user => {
+        this.serviceUser = user;
+      });
   }
 
   getUserData(data: User) {
@@ -56,6 +62,11 @@ export class ParentComponent {
     this.stateService.setUser(data);
 
     console.log('Received from child:', data);
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
 }

@@ -18,3 +18,11 @@
 <button (click)="sendData()">Send Data to Service</button>
 
 <app-child></app-child>
+<h2>Parent Component</h2>
+<app-child (userSubmit)="getUserData($event)"></app-child>
+
+<!-- Component using Signal -->
+<app-user-details [user]="receivedUser()"></app-user-details>
+
+<!-- Component using Service (cached data) -->
+<app-user-details [user]="serviceUser"></app-user-details>

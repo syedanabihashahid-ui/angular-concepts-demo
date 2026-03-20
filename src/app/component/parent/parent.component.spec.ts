@@ -19,4 +19,12 @@ describe('ParentComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should store user data correctly', () => {
+    const mockUser = { name: 'Nabiha', email: 'test@test.com' };
+
+    component.getUserData(mockUser);
+
+    expect(component.receivedUser()).toEqual(mockUser);
+  });
 });
